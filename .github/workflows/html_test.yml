@@ -1,0 +1,22 @@
+name: HTML Test
+
+on: [push, pull_request]
+
+jobs:
+  test-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check if index.html exists
+        run: |
+          if [ ! -f index.html ]; then
+            echo "index.html not found"
+            exit 1
+          fi
+
+      - name: Validate HTML structure
+        run: |
+          grep -q "<html>" index.html
